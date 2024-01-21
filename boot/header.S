@@ -89,7 +89,7 @@ coff_header:
 #else
 	.word	IMAGE_FILE_MACHINE_I386		# Machine (i386)
 #endif
-	.word	3				# NumberOfSections
+	.word	4				# NumberOfSections
 	.long	0 				# TimeDateStamp
 	.long	0				# PointerToSymbolTable
 	.long	0				# NumberOfSymbols
@@ -192,6 +192,22 @@ section_table:
 	.long	IMAGE_SCN_MEM_READ		\
 	      | IMAGE_SCN_MEM_EXECUTE		\
 	      | IMAGE_SCN_CNT_CODE		# Characteristics (section flags)
+
+	.ascii	".data"
+	.byte	0
+	.byte	0
+	.byte	0
+	.long	_virt_data_size			# VirtualSize
+	.long	_virt_data_start		# VirtualAddress
+	.long	_file_data_size			# SizeOfRawData
+	.long	_file_data_start		# PointerToRawData
+	.long	0				# PointerToRelocations
+	.long	0				# PointerToLineNumbers
+	.word	0				# NumberOfRelocations
+	.word	0				# NumberOfLineNumbers
+	.long	IMAGE_SCN_MEM_READ		\
+	      | IMAGE_SCN_MEM_WRITE		\
+	      | IMAGE_SCN_CNT_INITIALIZED_DATA	# Characteristics (section flags)
 
 	.ascii	".reloc"
 	.byte	0
